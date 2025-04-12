@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WASTE TO WORTH - Receiver Panel</title>
+  <style>
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #2E7D32;
+      --accent-color: #8BC34A;
+      --dark-color: #1B5E20;
+      --light-color: #C8E6C9;
+      --text-color: #333;
+      --light-text: #f8f8f8;
+      --error-color: #f44336;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: var(--text-color);
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      padding: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 1.5rem;
+    }
+
+    nav ul li a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .btn-receiver {
+      background-color: #FF9800;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    @media (max-width: 768px) {
+      header .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav ul {
+        margin-top: 1rem;
+        justify-content: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">WASTE TO WORTH Receiver</h1>
+      <nav>
+        <ul>
+          <li><a href="#request">Request Food</a></li>
+          <li><a href="#history">Request History</a></li>
+          <li><a href="../index.html">Back to Main</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="login" class="login-section">
+      <div class="container">
+        <h2>Orphanage/Shelter Login</h2>
+        <form id="receiverForm">
+          <div class="form-group">
+            <label for="orgName">Organization Name:</label>
+            <input type="text" id="orgName" required />
+          </div>
+          <div class="form-group">
+            <label for="orgEmail">Email:</label>
+            <input type="email" id="orgEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="orgPhone">Phone:</label>
+            <input type="tel" id="orgPhone" required />
+          </div>
+          <div class="form-group">
+            <label for="orgAddress">Address/Location:</label>
+            <textarea id="orgAddress" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="personsCount">Number of persons:</label>
+            <input type="number" id="personsCount" min="1" required />
+          </div>
+          <button type="submit" class="btn btn-receiver">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="request" class="request-section hidden">
+      <div class="container">
+        <h2>Request Food</h2>
+        <form id="foodRequestForm">
+          <div class="form-group">
+            <label for="requestType">Food Type Needed:</label>
+            <select id="requestType" multiple required>
+              <option value="prepared">Prepared Food</option>
+              <option value="packaged">Packaged Food</option>
+              <option value="perishable">Perishable Goods</option>
+              <option value="non-perishable">Non-Perishable Goods</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="requestQuantity">Quantity Needed (servings):</label>
+            <input type="number" id="requestQuantity" min="1" required />
+          </div>
+          <div class="form-group">
+            <label for="deliveryTime">Preferred Delivery Time:</label>
+            <input type="datetime-local" id="deliveryTime" required />
+          </div>
+          <div class="form-group">
+            <label for="specialNeeds">Special Needs/Allergies:</label>
+            <textarea id="specialNeeds"></textarea>
+          </div>
+          <button type="submit" class="btn btn-receiver">Submit Request</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const receiverForm = document.getElementById('receiverForm');
+      const requestSection = document.getElementById('request');
+
+      if (receiverForm) {
+        receiverForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const orgName = document.getElementById('orgName').value;
+          const email = document.getElementById('orgEmail').value;
+          const phone = document.getElementById('orgPhone').value;
+          const address = document.getElementById('orgAddress').value;
+          const personsCount = document.getElementById('personsCount').value;
+
+          if (orgName && email && phone && address && personsCount) {
+            console.log('Receiver registered:', {
+              orgName,
+              email,
+              phone,
+              address,
+              personsCount
+            });
+
+            document.getElementById('login').classList.add('hidden');
+            requestSection.classList.remove('hidden');
+          } else {
+            alert('Please fill in all fields');
+          }
+        });
+      }
+
+      const foodRequestForm = document.getElementById('foodRequestForm');
+      if (foodRequestForm) {
+        foodRequestForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const requestType = Array.from(document.getElementById('requestType').selectedOptions).map(
+            option => option.value
+          );
+          const quantity = document.getElementById('requestQuantity').value;
+          const deliveryTime = document.getElementById('deliveryTime').value;
+          const specialNeeds = document.getElementById('specialNeeds').value;
+
+          if (requestType.length > 0 && quantity && deliveryTime) {
+            console.log('Food request submitted:', {
+              requestType,
+              quantity,
+              deliveryTime,
+              specialNeeds
+            });
+
+            alert('Your food request has been submitted! We will notify you when a donation is available.');
+            foodRequestForm.reset();
+          } else {
+            alert('Please fill in all required fields');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

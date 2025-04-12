@@ -1,0 +1,534 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Savage - Fight Hunger, Save Food</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f39c12;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 64px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-donor {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-donor:hover {
+            background-color: #2ecc71;
+        }
+
+        .btn-receiver {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-receiver:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-admin {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-admin:hover {
+            background-color: #c0392b;
+        }
+
+        section {            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about, .how-it-works, .features {
+            background-color: #f9f9f9;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .step h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        /* Features Grid Styles */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #f39c12;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Instagram Feed Styles */
+        .instagram-feed-section {
+            background-color: white;
+            padding: 60px 0;
+        }
+        
+        .instagram-feed-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .widget_instagram-feed-widget {
+            margin-bottom: 30px;
+        }
+        
+        .fw-title {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .fw-title h3 {
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+        
+        #sb_instagram {
+            padding-bottom: 10px;
+            width: 100%;
+        }
+        
+        .sb_instagram_header {
+            padding: 5px;
+            margin-bottom: 10px;
+            padding-bottom: 0;
+            text-align: center;
+        }
+        
+        .sbi_header_text h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+        
+        #sbi_images {
+            padding: 5px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .sbi_photo_wrap {
+            height: 150px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        
+        .sbi_photo {
+            display: block;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .sbi_follow_btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .sbi_follow_btn a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e4405f;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .sbi_follow_btn a:hover {
+            background-color: #c13584;
+        }
+        
+        .sbi_follow_btn svg {
+            margin-right: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+            
+            #sbi_images {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">Food Savage</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#instagram-feed">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Connecting Excess Food With Those In Need</h2>
+            <div class="cta-buttons">
+                <a href="file:///C:/HTML/donar.html" class="btn btn-donor">I Want to Donate</a>
+                <a href="file:///C:/HTML/reciever.html" class="btn btn-receiver">I Need Food</a>
+                <a href="file:///C:/HTML/admin.html" class="btn btn-admin">Admin Login</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Food Savage</h2>
+            <p>Food Savage is a platform that connects food donors with orphanages and shelters to reduce food waste and fight hunger in our communities.</p>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <h3>1. Donate</h3>
+                    <p>Restaurants, caterers, and individuals can donate excess food.</p>
+                </div>
+                <div class="step">
+                    <h3>2. Verify</h3>
+                    <p>Our team verifies the food quality and safety.</p>
+                </div>
+                <div class="step">
+                    <h3>3. Distribute</h3>
+                    <p>Food is distributed to orphanages and shelters in need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Food Savage</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Quick &amp; Easy</h3>
+                    <p>Our simple platform makes it easy to donate or request food with just a few clicks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Local Impact</h3>
+                    <p>Connect with organizations in your community to make a direct local impact.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Track Results</h3>
+                    <p>See exactly how your donations are making a difference with our reporting tools.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Tax Benefits</h3>
+                    <p>Get documentation for tax deductions for your food donations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3>Sustainability</h3>
+                    <p>Reduce your environmental impact by diverting food waste from landfills.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Community</h3>
+                    <p>Join a network of businesses and organizations committed to ending hunger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="instagram-feed" class="instagram-feed-section">
+        <div class="container instagram-feed-container">
+            <div id="instagram-feed-widget-6" class="widget_instagram-feed-widget">
+                <div class="instagram-feed">
+    <div class="instagram-header">
+        <h3>Instagram Feed</h3>
+        <a href="https://www.instagram.com/ra_vi_te_ja/" target="_blank" rel="noopener nofollow" class="instagram-follow-btn">
+            <i class="fab fa-instagram"></i> Follow @ZEROWASTAGE
+        </a>
+    </div>
+    
+    <!-- Placeholder for Instagram feed - you would typically use a plugin or API to populate this -->
+    
+</div>
+
+<style>
+    .instagram-feed {
+        max-width: 100%;
+        margin: 30px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .instagram-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .instagram-header h3 {
+        margin: 0;
+        color: #333;
+        font-size: 1.2rem;
+    }
+
+    .instagram-follow-btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 15px;
+        background: #405DE6;
+        color: white !important;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.3s;
+    }
+
+    .instagram-follow-btn:hover {
+        background: #3a52d1;
+    }
+
+    .instagram-follow-btn i {
+        margin-right: 8px;
+        font-size: 1.1rem;
+    }
+
+    .instagram-posts {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .post-placeholder {
+        aspect-ratio: 1/1;
+        background: #f5f5f5;
+        border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+        .instagram-posts {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <h2>Find Us</h2>
+            <div class="map-container">
+                <iframe loading="lazy" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.173717899691!2d78.38630261435459!3d17.447753006580606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb93f19a9296a3%3A0xb9b1456829ce3a49!2sInorbit%20Mall%2C%20HITEC%20City!5e0!3m2!1sen!2sin!4v1649481938932!5m2!1sen!2sin">
+                </iframe>
+            </div>
+            <p>Contact us: sumanthkumar7251@gmail.com | 9573174370</p>
+            <p>© 2025 Food Savage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body></html>
